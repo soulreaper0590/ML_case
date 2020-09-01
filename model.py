@@ -33,7 +33,7 @@ X_train, X_test,Y_train, Y_test = train_test_split(x,y,test_size = 0.3,random_st
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import f1_score
-rbf_clf = RandomForestClassifier(class_weight=dic,n_estimators=100,max_depth = None)
+rbf_clf = RandomForestClassifier(n_estimators=100,max_depth = None)
 rbf_clf.fit(X_train, Y_train)
 Y_pred = rbf_clf.predict(X_test)
 print(rbf_clf.score(X_test, Y_test),f1_score(Y_test,Y_pred))
