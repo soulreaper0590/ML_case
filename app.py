@@ -15,11 +15,20 @@ def predict():
     '''
     For rendering results on HTML GUI
     '''
-    int_features = [int(x) for x in request.form.values()]
+    int_features = []
+    for x in request.form.values():
+        try :
+            int_features.append(int(x))
+        except:
+            int_features.append(float(x))
+    # int_features = [int(x) for x in request.form.values()]
     final_features = [np.array(int_features)]
     prediction = model.predict(final_features)
-    print(prediction[0])
-    return render_template('index.html', prediction_text='Personal Loan Predictions $ {}'.format(float(prediction[0])))
+    # print(prediction[0])
+    if(prediction[0]):
+        return render_template('index.html', prediction_text='Personal Loan Would Be Accepted')
+    else:
+        return render_template('index.html', prediction_text='Personal Loan Would NOT Be Accepted')
 
 @app.route('/predict_api',methods=['POST'])
 def predict_api():
